@@ -1,18 +1,22 @@
+<div align="center">
+
 # InfraStack
 
-**Production Infrastructure Blueprint** — a working library of enterprise-grade
+**Production Infrastructure Blueprint** - a working library of enterprise-grade
 infrastructure configurations, validated by an automated test matrix.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![CI](https://github.com/phoenixdev100/InfraStack/actions/workflows/ci.yml/badge.svg)](https://github.com/phoenixdev100/InfraStack/actions/workflows/ci.yml)
 [![InfraStack](https://img.shields.io/badge/project-InfraStack-blue)](https://github.com/phoenixdev100/InfraStack)
 
+</div>
+
 > **Naming:** **InfraStack** is the public project name. **PIB**
 > (Production Infrastructure Blueprint) remains the internal CLI/framework
 > identity (`scripts/pib.py`, `pibkit`, `pib-*` resource names) for
 > backward compatibility.
 
-InfraStack is not a collection of snippets — it is a **reference
+InfraStack is not a collection of snippets - it is a **reference
 implementation** you can clone, validate, and adapt. Every configuration is
 checked by a declarative validation matrix covering lint, schema, policy,
 and security rules.
@@ -70,14 +74,14 @@ docker compose -f stacks/observability-stack/compose.yaml up -d
 |--------|---------|
 | **PASS** | check ran and passed |
 | **FAIL** | check ran and found issues |
-| **NOT RUN** | required tool unavailable — never silently skipped |
+| **NOT RUN** | required tool unavailable - never silently skipped |
 | **NO TARGETS** | no files matched the check's patterns |
 
 Stages: `lint` · `validate` · `security` · `docs` · `unit` · `integration` · `e2e` · `performance`
 
 ## Security posture
 
-- No real secrets — placeholders (`CHANGE_ME`, `${VAR}`) only; `.env` files gitignored
+- No real secrets - placeholders (`CHANGE_ME`, `${VAR}`) only; `.env` files gitignored
 - Images pinned to explicit tags; container hardening (non-root, `cap_drop`, `no-new-privileges`, healthchecks, limits)
 - Kubernetes: NetworkPolicies, Pod Security, ResourceQuota/LimitRange, admission policies, signed-image verification (Kyverno + cosign)
 - Linux: systemd sandboxing (`systemd-analyze security` 9.6 → 1.1–1.9), sshd drop-ins, fail2ban, auditd, UFW
@@ -86,11 +90,11 @@ Stages: `lint` · `validate` · `security` · `docs` · `unit` · `integration` 
 
 ## Documentation
 
-- `docs/` — architecture, ADRs, standards, decisions
-- `reports/` — validation, security, readiness, verification evidence
-- `reports/compatibility-matrix.md` — what's tested on which platform
-- `reports/known-limitations.md` — honest list of what is *not* verified
-- `reports/troubleshooting.md` — centralized troubleshooting index
+- `docs/` - architecture, ADRs, standards, decisions
+- `reports/` - validation, security, readiness, verification evidence
+- `reports/compatibility-matrix.md` - what's tested on which platform
+- `reports/known-limitations.md` - honest list of what is *not* verified
+- `reports/troubleshooting.md` - centralized troubleshooting index
 
 ## Contributing
 
@@ -100,4 +104,4 @@ entry, and honest maturity labels.
 
 ## License
 
-MIT — see `LICENSE`.
+MIT - see `LICENSE`.
