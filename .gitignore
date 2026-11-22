@@ -1,0 +1,129 @@
+# ---------------------------------------------------------------------------
+# Secrets - NEVER commit real secrets. Use *.example templates instead.
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!**/.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.crt
+!**/testdata/**/*.crt
+id_rsa*
+id_ed25519*
+*.kubeconfig
+kubeconfig
+.kube/
+*.age
+!**/*.example.age
+secrets.yaml
+!**/secrets.example.yaml
+*.secret
+*.tfvars
+!**/*.tfvars.example
+*.auto.tfvars
+vault-token
+.vault-token
+credentials
+credentials.json
+service-account*.json
+
+# ---------------------------------------------------------------------------
+# Terraform / OpenTofu / Terragrunt state and caches
+# ---------------------------------------------------------------------------
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+.terraform.tfstate.lock.info
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terragrunt-cache/
+.tflint.d/
+
+# ---------------------------------------------------------------------------
+# Tooling caches and local environments
+# ---------------------------------------------------------------------------
+.tools/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+node_modules/
+.npm/
+.cache/
+dist/
+build/
+*.egg-info/
+.coverage
+htmlcov/
+charts/*/charts/*.tgz
+kubernetes/helm/charts/*/charts/
+.molecule/
+.vagrant/
+packer_cache/
+*.retry
+
+# ---------------------------------------------------------------------------
+# Generated reports (machine output). Curated *.md reports ARE committed.
+# ---------------------------------------------------------------------------
+reports/generated/
+*.sarif
+sbom*.json
+!**/testdata/**/sbom*.json
+
+# ---------------------------------------------------------------------------
+# Backups, dumps and data - never commit data
+# ---------------------------------------------------------------------------
+*.dump
+*.sql.gz
+*.bak
+*.backup
+*.tar.gz
+*.zip
+restic-repo/
+backup-data/
+
+# ---------------------------------------------------------------------------
+# OS / editor noise
+# ---------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.idea/
+.vscode/*
+!.vscode/extensions.json
+TREE.txt
+
+# Object-storage stack local secrets/config
+stacks/object-storage-stack/garage.toml
+stacks/object-storage-stack/.s3-credentials.env
+
+# Internal audit/working reports - kept locally, not shipped to GitHub.
+# User-facing evidence docs (validation/security/readiness/verification)
+# remain committed under reports/.
+reports/branding-consistency.md
+reports/external-user-experience.md
+reports/final-structural-audit.md
+reports/final-release-checklist.md
+reports/final-audit.md
+reports/missing-components.md
+reports/portability-audit.md
+reports/changes-made.md
+reports/implementation-summary.md
+
+# Local commit-series cheat sheet (not for GitHub)
+commits.md
