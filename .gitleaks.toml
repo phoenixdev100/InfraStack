@@ -1,0 +1,31 @@
+# Gitleaks configuration - https://github.com/gitleaks/gitleaks
+# Extends the maintained default ruleset; only allowlists documented
+# placeholders and local tool/cache directories.
+title = "production-infrastructure-blueprint"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Documented placeholders and git-ignored local tool directories"
+paths = [
+  '''(^|/)\.venv/''',
+  '''(^|/)\.tools/''',
+  '''(^|/)node_modules/''',
+  '''(^|/)\.terraform/''',
+  '''(^|/)\.git/''',
+  '''(^|/)reports/generated/''',
+  '''package-lock\.json$''',
+  '''scripts/setup/tools\.lock\.json$''',
+  # Placeholder-only Secret examples and secret-detection test fixtures
+  '''\.example\.yaml$''',
+  '''tests/unit/test_policies\.py$''',
+  '''tests/fixtures/''',
+]
+regexes = [
+  '''CHANGE_ME[A-Za-z0-9_]*''',
+  '''YOUR_[A-Z0-9_]+''',
+  '''EXAMPLE[A-Z0-9]*''',
+  '''ENC\[AES256_GCM,data:[A-Za-z0-9+/=]+''',
+]
+stopwords = ["CHANGE_ME", "example.com", "placeholder"]
