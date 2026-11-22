@@ -1,0 +1,33 @@
+# yamllint configuration - https://yamllint.readthedocs.io/
+extends: default
+
+ignore: |
+  node_modules/
+  .venv/
+  .tools/
+  reports/generated/
+  kubernetes/helm/charts/*/templates/
+
+rules:
+  line-length:
+    max: 160
+    level: warning
+    allow-non-breakable-words: true
+  document-start: disable          # many upstream formats (compose, prometheus) omit '---'
+  truthy:
+    allowed-values: ["true", "false"]
+    check-keys: false              # GitHub Actions uses the key `on:`
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: disable
+  indentation:
+    spaces: 2
+    indent-sequences: whatever     # both K8s and Ansible styles are common
+  braces:
+    max-spaces-inside: 1
+  brackets:
+    max-spaces-inside: 1
+  octal-values:
+    forbid-implicit-octal: true    # avoid file-mode surprises (0644 vs "0644")
+  key-duplicates: enable
+  anchors: enable
