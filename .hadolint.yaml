@@ -1,0 +1,14 @@
+# Hadolint - https://github.com/hadolint/hadolint
+failure-threshold: style
+trustedRegistries:
+  - docker.io
+  - gcr.io
+  - ghcr.io
+  - quay.io
+  - registry.k8s.io
+  - cgr.dev
+override:
+  error:
+    - DL3002   # last USER must not be root
+    - DL3007   # never use :latest
+    - DL3020   # COPY instead of ADD

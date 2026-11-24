@@ -1,0 +1,13 @@
+{
+  // https://github.com/DavidAnson/markdownlint-cli2
+  "config": {
+    "default": true,
+    "MD013": false,          // line length: prose and tables wrap naturally
+    "MD024": { "siblings_only": true },
+    "MD033": { "allowed_elements": ["br", "details", "summary"] },
+    "MD041": false,          // generated reports start with an HTML comment
+    "MD060": false           // table column alignment is cosmetic
+  },
+  "globs": ["**/*.md"],
+  "ignores": ["node_modules/**", ".venv/**", ".tools/**", "reports/generated/**", "**/.terraform/**", "**/CHANGELOG.md"]
+}

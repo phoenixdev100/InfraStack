@@ -1,0 +1,23 @@
+# Trivy configuration - https://trivy.dev/latest/docs/references/configuration/config-file/
+# Used by: trivy config --config trivy.yaml .
+exit-code: 1
+severity:
+  - HIGH
+  - CRITICAL
+scan:
+  skip-dirs:
+    - node_modules
+    - .venv
+    - .tools
+    - "**/.terraform"
+    - reports/generated
+    - tests/fixtures
+misconfiguration:
+  # Helm charts are rendered with their default values
+  scanners:
+    - dockerfile
+    - kubernetes
+    - helm
+    - terraform
+    - cloudformation
+ignorefile: .trivyignore.yaml
