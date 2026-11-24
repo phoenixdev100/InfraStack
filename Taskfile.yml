@@ -1,0 +1,58 @@
+# https://taskfile.dev - equivalent of the Makefile for Task users.
+version: "3"
+
+vars:
+  PY:
+    sh: '[ -x .venv/bin/python ] && echo .venv/bin/python || echo .venv/Scripts/python.exe'
+  PIB: "{{.PY}} scripts/pib.py"
+
+tasks:
+  default:
+    cmds: [task --list]
+    silent: true
+  setup:
+    desc: Create .venv, install pinned tooling and checksum-verified binaries
+    cmds:
+      - python3 -m venv .venv
+      - "{{.PY}} -m pip install -r requirements/dev.txt"
+      - "{{.PY}} scripts/setup/install_tools.py"
+      - npm ci --ignore-scripts --no-audit --no-fund
+  format:
+    desc: Apply formatters
+    cmds: ["{{.PY}} scripts/format/format.py"]
+  lint:
+    desc: Syntax + style linters
+    cmds: ["{{.PIB}} run lint {{.CLI_ARGS}}"]
+  validate:
+    desc: Schema/semantic validation
+    cmds: ["{{.PIB}} run validate {{.CLI_ARGS}}"]
+  test-security:
+    desc: Secret, misconfiguration and vulnerability scanning
+    cmds: ["{{.PIB}} run security {{.CLI_ARGS}}"]
+  docs-check:
+    desc: Markdown lint, links, hygiene
+    cmds: ["{{.PIB}} run docs {{.CLI_ARGS}}"]
+  test-unit:
+    desc: Unit tests
+    cmds: ["{{.PIB}} run unit {{.CLI_ARGS}}"]
+  test-integration:
+    desc: Integration tests
+    cmds: ["{{.PIB}} run integration {{.CLI_ARGS}}"]
+  test-e2e:
+    desc: End-to-end stacks (Docker)
+    cmds: ["{{.PIB}} run e2e {{.CLI_ARGS}}"]
+  test-performance:
+    desc: Safety-capped local k6 tests
+    cmds: ["{{.PIB}} run performance {{.CLI_ARGS}}"]
+  test:
+    desc: Unit + integration
+    cmds: [task: test-unit, task: test-integration]
+  test-all:
+    desc: Every stage
+    cmds: ["{{.PIB}} run all {{.CLI_ARGS}}"]
+  report:
+    desc: Regenerate reports
+    cmds: ["{{.PIB}} report"]
+  clean:
+    desc: Remove caches and generated output
+    cmds: ["{{.PY}} scripts/cleanup/clean.py"]
