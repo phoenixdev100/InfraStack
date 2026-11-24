@@ -1,0 +1,53 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Dependency update policy. The cooling-off period guards against compromised fresh releases.",
+  "extends": [
+    "config:recommended",
+    ":semanticCommits",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "minimumReleaseAge": "7 days",
+  "internalChecksFilter": "strict",
+  "prConcurrentLimit": 10,
+  "labels": ["dependencies"],
+  "timezone": "Etc/UTC",
+  "schedule": ["before 6am on monday"],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "minimumReleaseAge": null,
+    "schedule": ["at any time"],
+    "labels": ["security"]
+  },
+  "docker": {
+    "pinDigests": true
+  },
+  "packageRules": [
+    {
+      "description": "Group GitHub Actions updates into one PR",
+      "matchManagers": ["github-actions"],
+      "groupName": "github-actions"
+    },
+    {
+      "description": "Major updates need human review of upstream release notes",
+      "matchUpdateTypes": ["major"],
+      "labels": ["dependencies", "major"]
+    },
+    {
+      "description": "PostgreSQL major upgrades require pg_upgrade or dump/restore; handled manually (see databases/relational/postgresql/README.md)",
+      "matchPackageNames": ["postgres", "docker.io/library/postgres"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Pinned validator binaries in scripts/setup/tools.yaml. After merge run update_tool_checksums.py (tests/unit/test_toolchain.py fails on a stale lock).",
+      "managerFilePatterns": ["/^scripts/setup/tools\\.yaml$/"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)\\n\\s+version: \"(?<currentValue>[^\"]+)\""
+      ],
+      "extractVersionTemplate": "^(?:kustomize/)?v?(?<version>.+)$"
+    }
+  ]
+}
