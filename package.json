@@ -1,0 +1,16 @@
+{
+  "name": "production-infrastructure-blueprint",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Repository tooling only (Markdown linting). Not an application.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "lint:md": "markdownlint-cli2"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.24.0"
+  }
+}
