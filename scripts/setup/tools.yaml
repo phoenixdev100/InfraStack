@@ -1,0 +1,195 @@
+# ---------------------------------------------------------------------------
+# Pinned validator / scanner binaries installed into .tools/bin (git-ignored).
+#
+# Human-edited source of truth. After changing a version run:
+#   python scripts/setup/update_tool_checksums.py
+# which resolves every artifact URL and records its digest in tools.lock.json,
+# preferring the vendor-published checksum file. install_tools.py refuses any
+# artifact whose digest differs from the lock file.
+#
+# Version policy: latest stable release that was at least 7 days old when
+# selected (supply-chain cooling-off period).
+# Placeholders: {v} = version.
+# ---------------------------------------------------------------------------
+platforms: [linux-amd64, linux-arm64, darwin-arm64, windows-amd64]
+
+tools:
+  shellcheck:
+    # renovate: datasource=github-releases depName=koalaman/shellcheck
+    version: "0.11.0"
+    purpose: Shell script static analysis
+    homepage: https://github.com/koalaman/shellcheck
+    checksums: {compute: true}  # upstream publishes no checksum file
+    artifacts:
+      linux-amd64: {url: "https://github.com/koalaman/shellcheck/releases/download/v{v}/shellcheck-v{v}.linux.x86_64.tar.gz", member: "shellcheck-v{v}/shellcheck"}
+      linux-arm64: {url: "https://github.com/koalaman/shellcheck/releases/download/v{v}/shellcheck-v{v}.linux.aarch64.tar.gz", member: "shellcheck-v{v}/shellcheck"}
+      darwin-arm64: {url: "https://github.com/koalaman/shellcheck/releases/download/v{v}/shellcheck-v{v}.darwin.aarch64.tar.gz", member: "shellcheck-v{v}/shellcheck"}
+      windows-amd64: {url: "https://github.com/koalaman/shellcheck/releases/download/v{v}/shellcheck-v{v}.zip", member: "shellcheck.exe"}
+
+  shfmt:
+    # renovate: datasource=github-releases depName=mvdan/sh
+    version: "3.14.1"
+    purpose: Shell script formatter
+    homepage: https://github.com/mvdan/sh
+    checksums: {compute: true}  # no checksum file published for this release
+    artifacts:
+      linux-amd64: {url: "https://github.com/mvdan/sh/releases/download/v{v}/shfmt_v{v}_linux_amd64"}
+      linux-arm64: {url: "https://github.com/mvdan/sh/releases/download/v{v}/shfmt_v{v}_linux_arm64"}
+      darwin-arm64: {url: "https://github.com/mvdan/sh/releases/download/v{v}/shfmt_v{v}_darwin_arm64"}
+      windows-amd64: {url: "https://github.com/mvdan/sh/releases/download/v{v}/shfmt_v{v}_windows_amd64.exe"}
+
+  actionlint:
+    # renovate: datasource=github-releases depName=rhysd/actionlint
+    version: "1.7.12"
+    purpose: GitHub Actions workflow linter
+    homepage: https://github.com/rhysd/actionlint
+    checksums: {url: "https://github.com/rhysd/actionlint/releases/download/v{v}/actionlint_{v}_checksums.txt", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/rhysd/actionlint/releases/download/v{v}/actionlint_{v}_linux_amd64.tar.gz", member: actionlint}
+      linux-arm64: {url: "https://github.com/rhysd/actionlint/releases/download/v{v}/actionlint_{v}_linux_arm64.tar.gz", member: actionlint}
+      darwin-arm64: {url: "https://github.com/rhysd/actionlint/releases/download/v{v}/actionlint_{v}_darwin_arm64.tar.gz", member: actionlint}
+      windows-amd64: {url: "https://github.com/rhysd/actionlint/releases/download/v{v}/actionlint_{v}_windows_amd64.zip", member: actionlint.exe}
+
+  gitleaks:
+    # renovate: datasource=github-releases depName=gitleaks/gitleaks
+    version: "8.30.1"
+    purpose: Secret scanning
+    homepage: https://github.com/gitleaks/gitleaks
+    checksums: {url: "https://github.com/gitleaks/gitleaks/releases/download/v{v}/gitleaks_{v}_checksums.txt", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/gitleaks/gitleaks/releases/download/v{v}/gitleaks_{v}_linux_x64.tar.gz", member: gitleaks}
+      linux-arm64: {url: "https://github.com/gitleaks/gitleaks/releases/download/v{v}/gitleaks_{v}_linux_arm64.tar.gz", member: gitleaks}
+      darwin-arm64: {url: "https://github.com/gitleaks/gitleaks/releases/download/v{v}/gitleaks_{v}_darwin_arm64.tar.gz", member: gitleaks}
+      windows-amd64: {url: "https://github.com/gitleaks/gitleaks/releases/download/v{v}/gitleaks_{v}_windows_x64.zip", member: gitleaks.exe}
+
+  kubeconform:
+    # renovate: datasource=github-releases depName=yannh/kubeconform
+    version: "0.8.0"
+    purpose: Kubernetes manifest schema validation
+    homepage: https://github.com/yannh/kubeconform
+    checksums: {url: "https://github.com/yannh/kubeconform/releases/download/v{v}/CHECKSUMS", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/yannh/kubeconform/releases/download/v{v}/kubeconform-linux-amd64.tar.gz", member: kubeconform}
+      linux-arm64: {url: "https://github.com/yannh/kubeconform/releases/download/v{v}/kubeconform-linux-arm64.tar.gz", member: kubeconform}
+      darwin-arm64: {url: "https://github.com/yannh/kubeconform/releases/download/v{v}/kubeconform-darwin-arm64.tar.gz", member: kubeconform}
+      windows-amd64: {url: "https://github.com/yannh/kubeconform/releases/download/v{v}/kubeconform-windows-amd64.zip", member: kubeconform.exe}
+
+  hadolint:
+    # renovate: datasource=github-releases depName=hadolint/hadolint
+    version: "2.15.1"
+    purpose: Dockerfile linter
+    homepage: https://github.com/hadolint/hadolint
+    checksums: {url: "https://github.com/hadolint/hadolint/releases/download/v{v}/checksums.sha256", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/hadolint/hadolint/releases/download/v{v}/hadolint-linux-x86_64"}
+      linux-arm64: {url: "https://github.com/hadolint/hadolint/releases/download/v{v}/hadolint-linux-arm64"}
+      darwin-arm64: {url: "https://github.com/hadolint/hadolint/releases/download/v{v}/hadolint-macos-arm64"}
+      windows-amd64: {url: "https://github.com/hadolint/hadolint/releases/download/v{v}/hadolint-windows-x86_64.exe"}
+
+  promtool:
+    # renovate: datasource=github-releases depName=prometheus/prometheus
+    version: "3.16.0"
+    purpose: Prometheus config/rule validation and rule unit tests
+    homepage: https://prometheus.io/docs/prometheus/latest/command-line/promtool/
+    checksums: {url: "https://github.com/prometheus/prometheus/releases/download/v{v}/sha256sums.txt", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/prometheus/prometheus/releases/download/v{v}/prometheus-{v}.linux-amd64.tar.gz", member: "prometheus-{v}.linux-amd64/promtool"}
+      linux-arm64: {url: "https://github.com/prometheus/prometheus/releases/download/v{v}/prometheus-{v}.linux-arm64.tar.gz", member: "prometheus-{v}.linux-arm64/promtool"}
+      darwin-arm64: {url: "https://github.com/prometheus/prometheus/releases/download/v{v}/prometheus-{v}.darwin-arm64.tar.gz", member: "prometheus-{v}.darwin-arm64/promtool"}
+      windows-amd64: {url: "https://github.com/prometheus/prometheus/releases/download/v{v}/prometheus-{v}.windows-amd64.zip", member: "prometheus-{v}.windows-amd64/promtool.exe"}
+
+  amtool:
+    # renovate: datasource=github-releases depName=prometheus/alertmanager
+    version: "0.35.0"
+    purpose: Alertmanager config validation
+    homepage: https://github.com/prometheus/alertmanager
+    checksums: {url: "https://github.com/prometheus/alertmanager/releases/download/v{v}/sha256sums.txt", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/prometheus/alertmanager/releases/download/v{v}/alertmanager-{v}.linux-amd64.tar.gz", member: "alertmanager-{v}.linux-amd64/amtool"}
+      linux-arm64: {url: "https://github.com/prometheus/alertmanager/releases/download/v{v}/alertmanager-{v}.linux-arm64.tar.gz", member: "alertmanager-{v}.linux-arm64/amtool"}
+      darwin-arm64: {url: "https://github.com/prometheus/alertmanager/releases/download/v{v}/alertmanager-{v}.darwin-arm64.tar.gz", member: "alertmanager-{v}.darwin-arm64/amtool"}
+      windows-amd64: {url: "https://github.com/prometheus/alertmanager/releases/download/v{v}/alertmanager-{v}.windows-amd64.zip", member: "alertmanager-{v}.windows-amd64/amtool.exe"}
+
+  kustomize:
+    # renovate: datasource=github-releases depName=kubernetes-sigs/kustomize
+    version: "5.8.3"
+    purpose: Render Kustomize overlays
+    homepage: https://kubectl.docs.kubernetes.io/
+    checksums: {url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv{v}/checksums.txt", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv{v}/kustomize_v{v}_linux_amd64.tar.gz", member: kustomize}
+      linux-arm64: {url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv{v}/kustomize_v{v}_linux_arm64.tar.gz", member: kustomize}
+      darwin-arm64: {url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv{v}/kustomize_v{v}_darwin_arm64.tar.gz", member: kustomize}
+      windows-amd64: {url: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv{v}/kustomize_v{v}_windows_amd64.zip", member: kustomize.exe}
+
+  helm:
+    # renovate: datasource=github-releases depName=helm/helm
+    version: "4.3.1"
+    purpose: Helm chart lint/template rendering
+    homepage: https://helm.sh/docs/
+    checksums: {per_file_suffix: ".sha256sum", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://get.helm.sh/helm-v{v}-linux-amd64.tar.gz", member: linux-amd64/helm}
+      linux-arm64: {url: "https://get.helm.sh/helm-v{v}-linux-arm64.tar.gz", member: linux-arm64/helm}
+      darwin-arm64: {url: "https://get.helm.sh/helm-v{v}-darwin-arm64.tar.gz", member: darwin-arm64/helm}
+      windows-amd64: {url: "https://get.helm.sh/helm-v{v}-windows-amd64.zip", member: windows-amd64/helm.exe}
+
+  terraform:
+    # renovate: datasource=github-releases depName=hashicorp/terraform
+    version: "1.17.2"
+    purpose: Terraform fmt/validate/test
+    homepage: https://developer.hashicorp.com/terraform
+    checksums: {url: "https://releases.hashicorp.com/terraform/{v}/terraform_{v}_SHA256SUMS", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://releases.hashicorp.com/terraform/{v}/terraform_{v}_linux_amd64.zip", member: terraform}
+      linux-arm64: {url: "https://releases.hashicorp.com/terraform/{v}/terraform_{v}_linux_arm64.zip", member: terraform}
+      darwin-arm64: {url: "https://releases.hashicorp.com/terraform/{v}/terraform_{v}_darwin_arm64.zip", member: terraform}
+      windows-amd64: {url: "https://releases.hashicorp.com/terraform/{v}/terraform_{v}_windows_amd64.zip", member: terraform.exe}
+
+  tflint:
+    # renovate: datasource=github-releases depName=terraform-linters/tflint
+    version: "0.66.0"
+    purpose: Terraform linter
+    homepage: https://github.com/terraform-linters/tflint
+    checksums: {url: "https://github.com/terraform-linters/tflint/releases/download/v{v}/checksums.txt", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/terraform-linters/tflint/releases/download/v{v}/tflint_linux_amd64.zip", member: tflint}
+      linux-arm64: {url: "https://github.com/terraform-linters/tflint/releases/download/v{v}/tflint_linux_arm64.zip", member: tflint}
+      darwin-arm64: {url: "https://github.com/terraform-linters/tflint/releases/download/v{v}/tflint_darwin_arm64.zip", member: tflint}
+      windows-amd64: {url: "https://github.com/terraform-linters/tflint/releases/download/v{v}/tflint_windows_amd64.zip", member: tflint.exe}
+
+  restic:
+    # renovate: datasource=github-releases depName=restic/restic
+    version: "0.19.1"
+    purpose: Backup tool (backup/restore integration test)
+    homepage: https://restic.readthedocs.io/
+    checksums: {url: "https://github.com/restic/restic/releases/download/v{v}/SHA256SUMS", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/restic/restic/releases/download/v{v}/restic_{v}_linux_amd64.bz2"}
+      linux-arm64: {url: "https://github.com/restic/restic/releases/download/v{v}/restic_{v}_linux_arm64.bz2"}
+      darwin-arm64: {url: "https://github.com/restic/restic/releases/download/v{v}/restic_{v}_darwin_arm64.bz2"}
+      windows-amd64: {url: "https://github.com/restic/restic/releases/download/v{v}/restic_{v}_windows_amd64.zip", member: "restic_{v}_windows_amd64.exe"}
+
+  caddy:
+    # renovate: datasource=github-releases depName=caddyserver/caddy
+    version: "2.11.9"
+    purpose: Caddyfile adapt/validate
+    homepage: https://caddyserver.com/docs/
+    checksums: {url: "https://github.com/caddyserver/caddy/releases/download/v{v}/caddy_{v}_checksums.txt", algo: sha512}
+    artifacts:
+      linux-amd64: {url: "https://github.com/caddyserver/caddy/releases/download/v{v}/caddy_{v}_linux_amd64.tar.gz", member: caddy}
+      linux-arm64: {url: "https://github.com/caddyserver/caddy/releases/download/v{v}/caddy_{v}_linux_arm64.tar.gz", member: caddy}
+      darwin-arm64: {url: "https://github.com/caddyserver/caddy/releases/download/v{v}/caddy_{v}_mac_arm64.tar.gz", member: caddy}
+      windows-amd64: {url: "https://github.com/caddyserver/caddy/releases/download/v{v}/caddy_{v}_windows_amd64.zip", member: caddy.exe}
+
+  trivy:
+    # renovate: datasource=github-releases depName=aquasecurity/trivy
+    version: "0.76.1"
+    purpose: Vulnerability, misconfiguration and secret scanning
+    homepage: https://trivy.dev/
+    checksums: {url: "https://github.com/aquasecurity/trivy/releases/download/v{v}/trivy_{v}_checksums.txt", algo: sha256}
+    artifacts:
+      linux-amd64: {url: "https://github.com/aquasecurity/trivy/releases/download/v{v}/trivy_{v}_Linux-64bit.tar.gz", member: trivy}
+      linux-arm64: {url: "https://github.com/aquasecurity/trivy/releases/download/v{v}/trivy_{v}_Linux-ARM64.tar.gz", member: trivy}
+      darwin-arm64: {url: "https://github.com/aquasecurity/trivy/releases/download/v{v}/trivy_{v}_macOS-ARM64.tar.gz", member: trivy}
+      windows-amd64: {url: "https://github.com/aquasecurity/trivy/releases/download/v{v}/trivy_{v}_windows-64bit.zip", member: trivy.exe}
