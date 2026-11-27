@@ -1,0 +1,8 @@
+# Repository tooling for validation and tests.
+# Versions are pinned exactly and were at least 7 days old when selected.
+# Updated by Renovate (see renovate.json, minimumReleaseAge = 7 days).
+PyYAML==6.0.3          # YAML parsing for validators and policy tests
+jsonschema==4.26.0     # JSON Schema validation of inventory and configs
+pytest==9.2.0          # unit / policy / integration test runner
+yamllint==1.38.0       # YAML style and syntax linting
+ruff==0.17.5           # Python lint + format
