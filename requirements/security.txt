@@ -1,0 +1,2 @@
+# Optional heavy security scanners (installed in CI, optional locally).
+checkov==3.4.5
