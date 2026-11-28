@@ -1,0 +1,3 @@
+# Ansible toolchain (Linux/macOS control nodes only; Ansible does not support Windows control nodes).
+ansible-core==2.22.0
+ansible-lint==26.11.0
